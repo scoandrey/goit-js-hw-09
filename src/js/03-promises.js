@@ -23,6 +23,11 @@ form.addEventListener('submit', (event) => {
   const delay = Number(delayInput.value);
   const step = Number(stepInput.value);
   const amount = Number(amountInput.value);
+  
+  if (delay < 0 || step < 0 || amount <= 0) {
+    Notify.failure(`❌ Invalid input values!`);
+    return;
+  }
 
   for (let i = 1; i <= amount; i++) {
     createPromise(i, delay + (i - 1) * step)
@@ -33,4 +38,5 @@ form.addEventListener('submit', (event) => {
         Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
   }
+
 });

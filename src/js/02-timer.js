@@ -39,11 +39,13 @@ const countdown = (targetDate) => {
 };
 
 flatpickr(datetimePicker, {
+  
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
+    startButton.disabled = true;
     const selectedDate = selectedDates[0];
     if (selectedDate.getTime() <= new Date().getTime()) {
       Notify.failure("Please choose a date in the future");
@@ -53,8 +55,8 @@ flatpickr(datetimePicker, {
 
     startButton.disabled = false;
     startButton.addEventListener("click", () => {
-      countdown(selectedDate);
       startButton.disabled = true;
+      countdown(selectedDate);
     });
   },
 });
